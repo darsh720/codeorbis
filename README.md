@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/logo.svg" alt="CodeOrbis Logo" width="200"/>
+  <img src="assets/logo.svg" alt="CodeOrbis Logo" height="100" width="200"/>
 </p>
 
 # CodeOrbis Contact Form
