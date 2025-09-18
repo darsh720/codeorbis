@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 100" width="320" height="100">
+  <defs>
+    <linearGradient id="coreGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#00d4ff;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#ff6b35;stop-opacity:1" />
+    </linearGradient>
+    
+    <linearGradient id="textGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#2c3e50;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#34495e;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2c3e50;stop-opacity:1" />
+    </linearGradient>
+    
+    <linearGradient id="codeTextGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#00d4ff;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#4ecdc4;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Glow effect -->
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge> 
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    
+    <!-- Text shadow -->
+    <filter id="textShadow">
+      <feDropShadow dx="1" dy="1" stdDeviation="1" flood-color="rgba(0,0,0,0.3)"/>
+    </filter>
+  </defs>
+  
+  <!-- Orbital Icon -->
+  <g transform="translate(50, 50)">
+    <!-- Outer Orbit Ring -->
+    <circle cx="0" cy="0" r="28" fill="none" stroke="#00d4ff" stroke-width="1.5" 
+            stroke-dasharray="88 16" opacity="0.8">
+      <animateTransform attributeName="transform" type="rotate" 
+                        values="0;360" dur="8s" repeatCount="indefinite"/>
+    </circle>
+    
+    <!-- Middle Orbit Ring -->
+    <circle cx="0" cy="0" r="20" fill="none" stroke="#ff6b35" stroke-width="1.5" 
+            stroke-dasharray="64 12" opacity="0.7">
+      <animateTransform attributeName="transform" type="rotate" 
+                        values="360;0" dur="6s" repeatCount="indefinite"/>
+    </circle>
+    
+    <!-- Inner Orbit Ring -->
+    <circle cx="0" cy="0" r="12" fill="none" stroke="#4ecdc4" stroke-width="1.5" 
+            stroke-dasharray="40 8" opacity="0.6">
+      <animateTransform attributeName="transform" type="rotate" 
+                        values="0;360" dur="4s" repeatCount="indefinite"/>
+    </circle>
+    
+    <!-- Central Core -->
+    <circle cx="0" cy="0" r="6" fill="url(#coreGradient)">
+      <animate attributeName="r" values="6;7;6" dur="2s" repeatCount="indefinite"/>
+    </circle>
+    
+    <!-- Core Center -->
+    <circle cx="0" cy="0" r="2.5" fill="white"/>
+    
+    <!-- Orbital Particles -->
+    <circle cx="24" cy="0" r="1.5" fill="#00d4ff" opacity="0.8">
+      <animateTransform attributeName="transform" type="rotate" 
+                        values="0;360" dur="8s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="-16" cy="0" r="1" fill="#ff6b35" opacity="0.7">
+      <animateTransform attributeName="transform" type="rotate" 
+                        values="180;540" dur="6s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="0" cy="10" r="0.8" fill="#4ecdc4" opacity="0.6">
+      <animateTransform attributeName="transform" type="rotate" 
+                        values="90;450" dur="4s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+  
+  <!-- Company Name -->
+  <text x="90" y="60" font-family="'Inter', 'SF Pro Display', system-ui, sans-serif" 
+        font-size="28" font-weight="700" letter-spacing="-0.5px" filter="url(#textShadow)">
+    <tspan fill="url(#codeTextGradient)">Code</tspan><tspan fill="url(#textGradient)">Orbis</tspan>
+  </text>
+  
+  <!-- Professional Tagline -->
+  <!-- <text x="90" y="60" font-family="'Inter', 'SF Pro Display', system-ui, sans-serif" 
+        font-size="9" font-weight="500" fill="#6c7b7f" letter-spacing="1.8px">
+    INNOVATIVE DEVELOPMENT
+  </text> -->
+</svg>
