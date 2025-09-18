@@ -1,0 +1,2001 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeOrbis | AI-Driven Development Solutions</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #00d4ff 0%, #ff6b35 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-item a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-item a:hover {
+            color: #00d4ff;
+        }
+
+        .nav-item a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(135deg, #00d4ff 0%, #ff6b35 100%);
+            transition: width 0.3s ease;
+        }
+
+        .nav-item a:hover::after {
+            width: 100%;
+        }
+
+        .start-project-btn {
+            background: linear-gradient(135deg, #00d4ff 0%, #ff6b35 100%);
+            color: white !important;
+            padding: 0.7rem 1.5rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 212, 255, 0.3);
+        }
+
+        .start-project-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 212, 255, 0.4);
+        }
+
+        .mobile-menu {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .mobile-menu span {
+            width: 25px;
+            height: 3px;
+            background: #333;
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            background:
+                radial-gradient(circle at 20% 80%, rgba(0, 212, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 107, 53, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(78, 205, 196, 0.1) 0%, transparent 50%),
+                linear-gradient(135deg, #f8fbff 0%, #e8f4fd 100%);
+            display: flex;
+            align-items: center;
+            padding-top: 100px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image:
+                radial-gradient(circle at 25px 25px, rgba(0, 212, 255, 0.15) 2px, transparent 0),
+                radial-gradient(circle at 75px 75px, rgba(255, 107, 53, 0.1) 1px, transparent 0);
+            background-size: 100px 100px, 150px 150px;
+            animation: float 20s ease-in-out infinite;
+            z-index: 1;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        .hero-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #00d4ff 0%, #ff6b35 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: slideInLeft 1s ease-out;
+        }
+
+        .hero-content .highlight {
+            color: #e74c3c;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            color: #666;
+            animation: slideInLeft 1s ease-out 0.2s both;
+        }
+
+        .cta-button {
+            background: linear-gradient(135deg, #00d4ff 0%, #ff6b35 100%);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 30px rgba(0, 212, 255, 0.3);
+            animation: slideInLeft 1s ease-out 0.4s both;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0, 212, 255, 0.4);
+        }
+
+        .hero-image {
+            text-align: center;
+            animation: slideInRight 1s ease-out;
+            position: relative;
+        }
+
+        .hero-illustration {
+            width: 100%;
+            max-width: 500px;
+            height: auto;
+            filter: drop-shadow(0 20px 40px rgba(0, 212, 255, 0.2));
+        }
+
+        /* Technologies Section */
+        .technologies {
+            padding: 5rem 0;
+            background: #fff;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #00d4ff 0%, #ff6b35 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 3rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .tech-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .tech-tab {
+            background: #f8f9fa;
+            border: 2px solid transparent;
+            padding: 0.8rem 2rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .tech-tab.active {
+            background: linear-gradient(135deg, #00d4ff 0%, #ff6b35 100%);
+            color: white;
+            border-color: #00d4ff;
+        }
+
+        .tech-tab:hover {
+            background: linear-gradient(135deg, #00d4ff 0%, #ff6b35 100%);
+            color: white;
+        }
+
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .tech-item {
+            text-align: center;
+            padding: 2rem;
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .tech-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+            border-color: #00d4ff;
+        }
+
+        .tech-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #00d4ff 0%, #ff6b35 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .tech-name {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        /* Services Section */
+        .services {
+            padding: 5rem 0;
+            background:
+                radial-gradient(circle at 70% 20%, rgba(0, 212, 255, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 30% 80%, rgba(255, 107, 53, 0.08) 0%, transparent 50%),
+                linear-gradient(135deg, #f0f8ff 0%, #e6f3ff 100%);
+            position: relative;
+        }
+
+        .services::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image:
+                linear-gradient(45deg, rgba(0, 212, 255, 0.03) 25%, transparent 25%),
+                linear-gradient(-45deg, rgba(255, 107, 53, 0.03) 25%, transparent 25%),
+                linear-gradient(45deg, transparent 75%, rgba(78, 205, 196, 0.03) 75%),
+                linear-gradient(-45deg, transparent 75%, rgba(0, 212, 255, 0.03) 75%);
+            background-size: 60px 60px;
+            background-position: 0 0, 0 30px, 30px -30px, -30px 0px;
+            z-index: 1;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+            border-color: #00d4ff;
+        }
+
+        .service-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #00d4ff 0%, #ff6b35 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .service-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .service-description {
+            color: #666;
+            line-height: 1.7;
+        }
+
+        /* Portfolio Section */
+        .portfolio {
+            padding: 5rem 0;
+            background: #fff;
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .portfolio-item {
+            background: #f8f9fa;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .portfolio-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+        }
+
+        .portfolio-image {
+            height: 200px;
+            background: linear-gradient(135deg, #00d4ff 0%, #ff6b35 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+        }
+
+        .portfolio-content {
+            padding: 1.5rem;
+        }
+
+        .portfolio-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+
+        .portfolio-category {
+            color: #00d4ff;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 5rem 0;
+            background: linear-gradient(135deg, #00d4ff 0%, #ff6b35 100%);
+            color: white;
+            position: relative;
+        }
+
+        .features::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image:
+                radial-gradient(circle at 20px 20px, rgba(255, 255, 255, 0.1) 1px, transparent 0),
+                linear-gradient(45deg, rgba(255, 255, 255, 0.03) 25%, transparent 25%),
+                linear-gradient(-45deg, rgba(255, 255, 255, 0.03) 25%, transparent 25%);
+            background-size: 40px 40px, 80px 80px, 80px 80px;
+            z-index: 1;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .feature-description {
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            padding: 5rem 0;
+            background: #fff;
+        }
+
+        .testimonial-card {
+            background: #f8f9fa;
+            padding: 3rem;
+            border-radius: 20px;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .testimonial-quote {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: #333;
+            margin-bottom: 2rem;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            font-weight: 700;
+            color: #667eea;
+            font-size: 1.1rem;
+        }
+
+        .testimonial-position {
+            color: #666;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 5rem 0;
+            background:
+                radial-gradient(circle at 20% 80%, rgba(0, 212, 255, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 107, 53, 0.08) 0%, transparent 50%),
+                linear-gradient(135deg, #f8fbff 0%, #e8f4fd 100%);
+        }
+
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 4rem;
+            margin-top: 3rem;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1.5rem;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .contact-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+            border-color: #00d4ff;
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #00d4ff 0%, #ff6b35 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .contact-details h4 {
+            color: #333;
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-details p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .contact-form-wrapper {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .contact-form-wrapper:hover {
+            border-color: #00d4ff;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            padding: 0.8rem;
+            border: 2px solid #e1e5e9;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #00d4ff;
+            box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, #00d4ff 0%, #ff6b35 100%);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 30px rgba(0, 212, 255, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0, 212, 255, 0.4);
+        }
+
+        .submit-btn:active {
+            transform: translateY(-1px);
+        }
+
+        /* Footer */
+        .footer {
+            background: #1a1a1a;
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: #00d4ff;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section ul li a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section ul li a:hover {
+            color: #00d4ff;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #333;
+            color: #999;
+        }
+
+        /* Animations */
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .mobile-menu {
+                display: flex;
+            }
+
+            .nav-menu {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: white;
+                flex-direction: column;
+                padding: 2rem;
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+
+            .hero-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 2rem;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-content p {
+                font-size: 1rem;
+            }
+
+            .tech-tabs {
+                gap: 0.5rem;
+            }
+
+            .tech-tab {
+                padding: 0.6rem 1rem;
+                font-size: 0.9rem;
+            }
+
+            .services-grid,
+            .portfolio-grid,
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-container {
+                padding: 0 1rem;
+            }
+
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+
+            .container {
+                padding: 0 1rem;
+            }
+        }
+
+        /* Utility Classes */
+        .text-center {
+            text-align: center;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .fade-in {
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 100" width="160" height="50"
+                    style="vertical-align: middle;">
+                    <defs>
+                        <linearGradient id="coreGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#00d4ff;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#ff6b35;stop-opacity:1" />
+                        </linearGradient>
+                        <linearGradient id="textGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" style="stop-color:#2c3e50;stop-opacity:1" />
+                            <stop offset="50%" style="stop-color:#34495e;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#2c3e50;stop-opacity:1" />
+                        </linearGradient>
+                        <linearGradient id="codeTextGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" style="stop-color:#00d4ff;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#4ecdc4;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                    <g transform="translate(50, 50)">
+                        <circle cx="0" cy="0" r="28" fill="none" stroke="#00d4ff" stroke-width="1.5"
+                            stroke-dasharray="88 16" opacity="0.8">
+                            <animateTransform attributeName="transform" type="rotate" values="0;360" dur="8s"
+                                repeatCount="indefinite" />
+                        </circle>
+                        <circle cx="0" cy="0" r="20" fill="none" stroke="#ff6b35" stroke-width="1.5"
+                            stroke-dasharray="64 12" opacity="0.7">
+                            <animateTransform attributeName="transform" type="rotate" values="360;0" dur="6s"
+                                repeatCount="indefinite" />
+                        </circle>
+                        <circle cx="0" cy="0" r="12" fill="none" stroke="#4ecdc4" stroke-width="1.5"
+                            stroke-dasharray="40 8" opacity="0.6">
+                            <animateTransform attributeName="transform" type="rotate" values="0;360" dur="4s"
+                                repeatCount="indefinite" />
+                        </circle>
+                        <circle cx="0" cy="0" r="6" fill="url(#coreGradient)">
+                            <animate attributeName="r" values="6;7;6" dur="2s" repeatCount="indefinite" />
+                        </circle>
+                        <circle cx="0" cy="0" r="2.5" fill="white" />
+                        <circle cx="24" cy="0" r="1.5" fill="#00d4ff" opacity="0.8">
+                            <animateTransform attributeName="transform" type="rotate" values="0;360" dur="8s"
+                                repeatCount="indefinite" />
+                        </circle>
+                        <circle cx="-16" cy="0" r="1" fill="#ff6b35" opacity="0.7">
+                            <animateTransform attributeName="transform" type="rotate" values="180;540" dur="6s"
+                                repeatCount="indefinite" />
+                        </circle>
+                        <circle cx="0" cy="10" r="0.8" fill="#4ecdc4" opacity="0.6">
+                            <animateTransform attributeName="transform" type="rotate" values="90;450" dur="4s"
+                                repeatCount="indefinite" />
+                        </circle>
+                    </g>
+                    <text x="90" y="60" font-family="'Inter', 'SF Pro Display', system-ui, sans-serif" font-size="28"
+                        font-weight="700" letter-spacing="-0.5px">
+                        <tspan fill="url(#codeTextGradient)">Code</tspan>
+                        <tspan fill="url(#textGradient)">Orbis</tspan>
+                    </text>
+                </svg>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="#home">Home</a></li>
+                <li class="nav-item"><a href="#services">Services</a></li>
+                <li class="nav-item"><a href="#technologies">Technologies</a></li>
+                <li class="nav-item"><a href="#portfolio">Portfolio</a></li>
+                <li class="nav-item"><a href="#about">About</a></li>
+                <li class="nav-item"><a href="#contact">Contact</a></li>
+            </ul>
+            <a href="#contact" class="start-project-btn">Start Project</a>
+            <div class="mobile-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1><span class="highlight">AI</span>-Driven Development</h1>
+                <p>Transform your ideas into intelligent, scalable solutions. We leverage cutting-edge AI technologies,
+                    modern frameworks, and our expert engineering team to build the future of software.</p>
+                <a href="#contact" class="cta-button">
+                    <i class="fas fa-rocket"></i> Get Started
+                </a>
+            </div>
+            <div class="hero-image">
+                <div class="hero-illustration">
+                    <svg viewBox="0 0 500 400" style="width: 100%; height: auto;">
+                        <defs>
+                            <linearGradient id="heroGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#00d4ff;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#ff6b35;stop-opacity:1" />
+                            </linearGradient>
+                            <linearGradient id="heroGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#4ecdc4;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#00d4ff;stop-opacity:1" />
+                            </linearGradient>
+                            <linearGradient id="heroGrad3" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#764ba2;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#667eea;stop-opacity:1" />
+                            </linearGradient>
+                            <filter id="glow">
+                                <feGaussianBlur stdDeviation="3" result="coloredBlur" />
+                                <feMerge>
+                                    <feMergeNode in="coloredBlur" />
+                                    <feMergeNode in="SourceGraphic" />
+                                </feMerge>
+                            </filter>
+                        </defs>
+
+                        <!-- Background ambient circles -->
+                        <circle cx="250" cy="200" r="150" fill="url(#heroGrad1)" opacity="0.08">
+                            <animate attributeName="r" values="150;170;150" dur="8s" repeatCount="indefinite" />
+                        </circle>
+                        <circle cx="250" cy="200" r="120" fill="url(#heroGrad2)" opacity="0.12">
+                            <animate attributeName="r" values="120;140;120" dur="6s" repeatCount="indefinite" />
+                        </circle>
+                        <circle cx="250" cy="200" r="90" fill="url(#heroGrad3)" opacity="0.1">
+                            <animate attributeName="r" values="90;110;90" dur="4s" repeatCount="indefinite" />
+                        </circle>
+
+                        <!-- Central AI Brain/Processor -->
+                        <g transform="translate(250, 200)">
+                            <!-- Core processor -->
+                            <rect x="-60" y="-40" width="120" height="80" rx="15" fill="url(#heroGrad1)" opacity="0.9"
+                                filter="url(#glow)">
+                                <animate attributeName="opacity" values="0.9;1;0.9" dur="3s" repeatCount="indefinite" />
+                            </rect>
+
+                            <!-- Circuit patterns inside -->
+                            <g opacity="0.8">
+                                <rect x="-45" y="-25" width="90" height="3" rx="1.5" fill="white">
+                                    <animate attributeName="opacity" values="0.8;1;0.8" dur="2s"
+                                        repeatCount="indefinite" />
+                                </rect>
+                                <rect x="-45" y="-15" width="65" height="3" rx="1.5" fill="white" opacity="0.7" />
+                                <rect x="-45" y="-5" width="80" height="3" rx="1.5" fill="white" opacity="0.9" />
+                                <rect x="-45" y="5" width="55" height="3" rx="1.5" fill="white" opacity="0.6" />
+                                <rect x="-45" y="15" width="75" height="3" rx="1.5" fill="white" opacity="0.8" />
+
+                                <!-- Connecting dots -->
+                                <circle cx="30" cy="-25" r="2" fill="#00d4ff" />
+                                <circle cx="15" cy="-5" r="2" fill="#ff6b35" />
+                                <circle cx="25" cy="15" r="2" fill="#4ecdc4" />
+                            </g>
+
+                            <!-- Neural network connections -->
+                            <g stroke="url(#heroGrad2)" stroke-width="2" fill="none" opacity="0.6">
+                                <path d="M-60,-20 Q-80,-30 -90,-10 Q-100,10 -80,20">
+                                    <animate attributeName="stroke-dasharray" values="0,100;50,50;100,0;0,100" dur="4s"
+                                        repeatCount="indefinite" />
+                                </path>
+                                <path d="M60,-15 Q80,-25 90,-5 Q100,15 80,25">
+                                    <animate attributeName="stroke-dasharray" values="100,0;50,50;0,100;100,0" dur="3s"
+                                        repeatCount="indefinite" />
+                                </path>
+                                <path d="M-20,-40 Q-30,-60 0,-70 Q30,-60 20,-40">
+                                    <animate attributeName="stroke-dasharray" values="0,80;40,40;80,0;0,80" dur="5s"
+                                        repeatCount="indefinite" />
+                                </path>
+                                <path d="M-15,40 Q-25,60 5,70 Q35,60 25,40">
+                                    <animate attributeName="stroke-dasharray" values="80,0;40,40;0,80;80,0" dur="3.5s"
+                                        repeatCount="indefinite" />
+                                </path>
+                            </g>
+                        </g>
+
+                        <!-- Floating data nodes -->
+                        <g>
+                            <!-- Top left cluster -->
+                            <circle cx="100" cy="80" r="8" fill="#00d4ff" opacity="0.8">
+                                <animate attributeName="r" values="8;12;8" dur="3s" repeatCount="indefinite" />
+                                <animateTransform attributeName="transform" type="rotate" values="0 100 80;360 100 80"
+                                    dur="10s" repeatCount="indefinite" />
+                            </circle>
+                            <circle cx="85" cy="95" r="5" fill="#ff6b35" opacity="0.7">
+                                <animateTransform attributeName="transform" type="rotate" values="0 100 80;360 100 80"
+                                    dur="10s" repeatCount="indefinite" />
+                            </circle>
+                            <circle cx="115" cy="95" r="6" fill="#4ecdc4" opacity="0.9">
+                                <animateTransform attributeName="transform" type="rotate" values="0 100 80;360 100 80"
+                                    dur="10s" repeatCount="indefinite" />
+                            </circle>
+
+                            <!-- Top right cluster -->
+                            <circle cx="400" cy="100" r="10" fill="#667eea" opacity="0.7">
+                                <animate attributeName="r" values="10;14;10" dur="4s" repeatCount="indefinite" />
+                                <animateTransform attributeName="transform" type="rotate" values="360 400 100;0 400 100"
+                                    dur="12s" repeatCount="indefinite" />
+                            </circle>
+                            <circle cx="420" cy="85" r="4" fill="#ff6b35" opacity="0.8">
+                                <animateTransform attributeName="transform" type="rotate" values="360 400 100;0 400 100"
+                                    dur="12s" repeatCount="indefinite" />
+                            </circle>
+                            <circle cx="380" cy="85" r="5" fill="#00d4ff" opacity="0.6">
+                                <animateTransform attributeName="transform" type="rotate" values="360 400 100;0 400 100"
+                                    dur="12s" repeatCount="indefinite" />
+                            </circle>
+
+                            <!-- Bottom left cluster -->
+                            <circle cx="80" cy="320" r="9" fill="#4ecdc4" opacity="0.8">
+                                <animate attributeName="r" values="9;13;9" dur="3.5s" repeatCount="indefinite" />
+                                <animateTransform attributeName="transform" type="rotate" values="0 80 320;360 80 320"
+                                    dur="8s" repeatCount="indefinite" />
+                            </circle>
+                            <circle cx="95" cy="305" r="4" fill="#764ba2" opacity="0.7">
+                                <animateTransform attributeName="transform" type="rotate" values="0 80 320;360 80 320"
+                                    dur="8s" repeatCount="indefinite" />
+                            </circle>
+                            <circle cx="65" cy="305" r="6" fill="#ff6b35" opacity="0.9">
+                                <animateTransform attributeName="transform" type="rotate" values="0 80 320;360 80 320"
+                                    dur="8s" repeatCount="indefinite" />
+                            </circle>
+
+                            <!-- Bottom right cluster -->
+                            <circle cx="420" cy="300" r="7" fill="#00d4ff" opacity="0.6">
+                                <animate attributeName="r" values="7;11;7" dur="2.5s" repeatCount="indefinite" />
+                                <animateTransform attributeName="transform" type="rotate" values="360 420 300;0 420 300"
+                                    dur="9s" repeatCount="indefinite" />
+                            </circle>
+                            <circle cx="405" cy="285" r="5" fill="#667eea" opacity="0.8">
+                                <animateTransform attributeName="transform" type="rotate" values="360 420 300;0 420 300"
+                                    dur="9s" repeatCount="indefinite" />
+                            </circle>
+                            <circle cx="435" cy="285" r="4" fill="#4ecdc4" opacity="0.7">
+                                <animateTransform attributeName="transform" type="rotate" values="360 420 300;0 420 300"
+                                    dur="9s" repeatCount="indefinite" />
+                            </circle>
+                        </g>
+
+                        <!-- Dynamic connection lines -->
+                        <g stroke-width="1" fill="none" opacity="0.4">
+                            <line x1="190" y1="160" x2="100" y2="80" stroke="url(#heroGrad1)">
+                                <animate attributeName="opacity" values="0.4;0.8;0.4" dur="3s"
+                                    repeatCount="indefinite" />
+                            </line>
+                            <line x1="310" y1="160" x2="400" y2="100" stroke="url(#heroGrad2)">
+                                <animate attributeName="opacity" values="0.4;0.8;0.4" dur="2.5s"
+                                    repeatCount="indefinite" />
+                            </line>
+                            <line x1="190" y1="240" x2="80" y2="320" stroke="url(#heroGrad3)">
+                                <animate attributeName="opacity" values="0.4;0.8;0.4" dur="4s"
+                                    repeatCount="indefinite" />
+                            </line>
+                            <line x1="310" y1="240" x2="420" y2="300" stroke="url(#heroGrad1)">
+                                <animate attributeName="opacity" values="0.4;0.8;0.4" dur="3.5s"
+                                    repeatCount="indefinite" />
+                            </line>
+                        </g>
+
+                        <!-- Floating particles for extra dynamism -->
+                        <g>
+                            <circle cx="150" cy="150" r="2" fill="#00d4ff" opacity="0.6">
+                                <animateTransform attributeName="transform" type="translate"
+                                    values="0,0; 20,-10; -15,15; 0,0" dur="6s" repeatCount="indefinite" />
+                            </circle>
+                            <circle cx="350" cy="250" r="1.5" fill="#ff6b35" opacity="0.7">
+                                <animateTransform attributeName="transform" type="translate"
+                                    values="0,0; -25,8; 10,-20; 0,0" dur="7s" repeatCount="indefinite" />
+                            </circle>
+                            <circle cx="120" cy="280" r="2.5" fill="#4ecdc4" opacity="0.5">
+                                <animateTransform attributeName="transform" type="translate"
+                                    values="0,0; 15,25; -20,-5; 0,0" dur="5s" repeatCount="indefinite" />
+                            </circle>
+                            <circle cx="380" cy="180" r="1.8" fill="#667eea" opacity="0.6">
+                                <animateTransform attributeName="transform" type="translate"
+                                    values="0,0; -10,-15; 18,12; 0,0" dur="8s" repeatCount="indefinite" />
+                            </circle>
+                        </g>
+
+                        <!-- AI Symbol at the top -->
+                        <g transform="translate(250, 60)">
+                            <circle cx="0" cy="0" r="25" fill="none" stroke="url(#heroGrad1)" stroke-width="2"
+                                opacity="0.8" />
+                            <path d="M-15 0 Q0 -20 15 0 Q0 20 -15 0" fill="url(#heroGrad2)" opacity="0.7">
+                                <animate attributeName="opacity" values="0.7;1;0.7" dur="3s" repeatCount="indefinite" />
+                            </path>
+                            <circle cx="0" cy="0" r="4" fill="white" />
+                            <text x="0" y="45" text-anchor="middle" font-family="Arial" font-size="12"
+                                font-weight="bold" fill="url(#heroGrad1)" opacity="0.8">AI</text>
+                        </g>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technologies Section -->
+    <section id="technologies" class="technologies">
+        <div class="container">
+            <h2 class="section-title">Technologies We Work With</h2>
+            <p class="section-subtitle">Our team of developers utilizes the latest technologies to turn your ideas into
+                impressive applications and software programs.</p>
+
+            <div class="tech-tabs">
+                <div class="tech-tab active" data-category="frontend">Frontend</div>
+                <div class="tech-tab" data-category="backend">Backend</div>
+                <div class="tech-tab" data-category="mobile">Mobile</div>
+                <div class="tech-tab" data-category="database">Database</div>
+                <div class="tech-tab" data-category="ai">AI/ML</div>
+            </div>
+
+            <div class="tech-grid" id="tech-grid">
+                <div class="tech-item" data-category="frontend">
+                    <div class="tech-icon"><i class="fab fa-react"></i></div>
+                    <div class="tech-name">React</div>
+                </div>
+                <div class="tech-item" data-category="frontend">
+                    <div class="tech-icon"><i class="fab fa-angular"></i></div>
+                    <div class="tech-name">Angular</div>
+                </div>
+                <div class="tech-item" data-category="frontend">
+                    <div class="tech-icon"><i class="fab fa-vuejs"></i></div>
+                    <div class="tech-name">Vue.js</div>
+                </div>
+                <div class="tech-item" data-category="frontend">
+                    <div class="tech-icon"><i class="fab fa-js-square"></i></div>
+                    <div class="tech-name">TypeScript</div>
+                </div>
+                <div class="tech-item" data-category="frontend">
+                    <div class="tech-icon"><i class="fab fa-html5"></i></div>
+                    <div class="tech-name">HTML5</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <div class="container">
+            <h2 class="section-title">Services We Provide</h2>
+
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-globe"></i></div>
+                    <div class="service-title">Web App Development</div>
+                    <div class="service-description">Build responsive, scalable web applications using modern frameworks
+                        and best practices.</div>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-mobile-alt"></i></div>
+                    <div class="service-title">Mobile App Development</div>
+                    <div class="service-description">Create native and cross-platform mobile applications for iOS and
+                        Android.</div>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-brain"></i></div>
+                    <div class="service-title">AI / ML Development</div>
+                    <div class="service-description">Implement intelligent solutions with machine learning and
+                        artificial intelligence.</div>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-digital-tachograph"></i></div>
+                    <div class="service-title">Digital Transformation</div>
+                    <div class="service-description">Transform your business processes with cutting-edge digital
+                        solutions.</div>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-cogs"></i></div>
+                    <div class="service-title">Software Product Engineering</div>
+                    <div class="service-description">End-to-end product development from concept to deployment and
+                        maintenance.</div>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-chart-line"></i></div>
+                    <div class="service-title">Technical Consulting Services</div>
+                    <div class="service-description">Expert guidance on technology strategy and implementation best
+                        practices.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="portfolio">
+        <div class="container">
+            <h2 class="section-title">View Our Work Portfolio</h2>
+            <p class="section-subtitle">As a Web, Mobile, Cloud, Desktop & AI development company, we have delivered a
+                range of applications that have significantly improved the business of our clients.</p>
+
+            <div class="portfolio-grid">
+                <div class="portfolio-item">
+                    <div class="portfolio-image">
+                        <i class="fas fa-chart-bar"></i>
+                    </div>
+                    <div class="portfolio-content">
+                        <div class="portfolio-title">Business Intelligence Platform</div>
+                        <div class="portfolio-category">Data Analytics Solution</div>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <div class="portfolio-image">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <div class="portfolio-content">
+                        <div class="portfolio-title">AI Chat Assistant</div>
+                        <div class="portfolio-category">AI/ML Application</div>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <div class="portfolio-image">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                    <div class="portfolio-content">
+                        <div class="portfolio-title">E-commerce Platform</div>
+                        <div class="portfolio-category">Web Application</div>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <div class="portfolio-image">
+                        <i class="fas fa-mobile"></i>
+                    </div>
+                    <div class="portfolio-content">
+                        <div class="portfolio-title">Fitness Tracking App</div>
+                        <div class="portfolio-category">Mobile Application</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <h2 class="section-title">Our Unique Features</h2>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-chart-line"></i></div>
+                    <div class="feature-title">Competitive Rates</div>
+                    <div class="feature-description">Get premium development services at competitive prices without
+                        compromising on quality.</div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-globe"></i></div>
+                    <div class="feature-title">Truly Global</div>
+                    <div class="feature-description">Serving clients worldwide with 24/7 availability and multi-timezone
+                        support.</div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-headset"></i></div>
+                    <div class="feature-title">24*7 Support</div>
+                    <div class="feature-description">Round-the-clock technical support and maintenance for all your
+                        projects.</div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-certificate"></i></div>
+                    <div class="feature-title">Certified Developers</div>
+                    <div class="feature-description">Our team consists of certified professionals with extensive
+                        industry experience.</div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-rocket"></i></div>
+                    <div class="feature-title">Latest Technology</div>
+                    <div class="feature-description">We use cutting-edge technologies and frameworks to deliver modern
+                        solutions.</div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-sync"></i></div>
+                    <div class="feature-title">Agile Development</div>
+                    <div class="feature-description">Fast, iterative development process with continuous delivery and
+                        regular updates.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="testimonials">
+        <div class="container">
+            <h2 class="section-title">What Do Our Clients Say</h2>
+
+            <div class="testimonial-card">
+                <div class="testimonial-quote">
+                    "I had the pleasure of working with the team at CodeOrbis for over a year, developing and testing
+                    our company's first AI-powered application. It was rolled out globally and performed exceptionally
+                    well. They did an outstanding job at translating functional specifications into intelligent
+                    solutions and implementing cutting-edge models. Project communication was excellent. I will
+                    definitely be using them again in the future."
+                </div>
+                <div class="testimonial-author">SARAH JOHNSON</div>
+                <div class="testimonial-position">CTO OF TECHSTART INNOVATIONS</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">Get In Touch</h2>
+            <p class="section-subtitle">Ready to start your project? Contact us today and let's discuss how we can help
+                bring your ideas to life.</p>
+
+            <div class="contact-container">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Our Office</h4>
+                            <p>123 Tech Street<br>Innovation District<br>San Francisco, CA 94102</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Call Us</h4>
+                            <p>+1 (555) 123-4567<br>+1 (555) 987-6543</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Email Us</h4>
+                            <p>info@codeorbis.com<br>hello@codeorbis.com</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Business Hours</h4>
+                            <p>Mon - Fri: 9:00 AM - 6:00 PM<br>Sat - Sun: 10:00 AM - 4:00 PM</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-form-wrapper">
+                    <form class="contact-form" id="contactForm" method="POST">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="firstName">First Name *</label>
+                                <input type="text" id="firstName" name="firstName" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName">Last Name *</label>
+                                <input type="text" id="lastName" name="lastName" required>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="email">Email Address *</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Phone Number</label>
+                                <input type="tel" id="phone" name="phone">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="company">Company Name</label>
+                            <input type="text" id="company" name="company">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="service">Service Interested In</label>
+                            <select id="service" name="service">
+                                <option value="">Select a service</option>
+                                <option value="web-development">Web App Development</option>
+                                <option value="mobile-development">Mobile App Development</option>
+                                <option value="ai-ml">AI/ML Development</option>
+                                <option value="digital-transformation">Digital Transformation</option>
+                                <option value="product-engineering">Software Product Engineering</option>
+                                <option value="consulting">Technical Consulting</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="budget">Project Budget</label>
+                            <select id="budget" name="budget">
+                                <option value="">Select budget range</option>
+                                <option value="5k-15k">$5,000 - $15,000</option>
+                                <option value="15k-50k">$15,000 - $50,000</option>
+                                <option value="50k-100k">$50,000 - $100,000</option>
+                                <option value="100k+">$100,000+</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message">Project Details *</label>
+                            <textarea id="message" name="message" rows="5"
+                                placeholder="Tell us about your project, goals, and requirements..."
+                                required></textarea>
+                        </div>
+
+                        <button type="submit" class="submit-btn">
+                            <i class="fas fa-paper-plane"></i>
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="logo" style="color: white; margin-bottom: 1rem;">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 100" width="120" height="38"
+                            style="vertical-align: middle;">
+                            <defs>
+                                <linearGradient id="footerCoreGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#00d4ff;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#ff6b35;stop-opacity:1" />
+                                </linearGradient>
+                                <linearGradient id="footerCodeTextGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                    <stop offset="0%" style="stop-color:#00d4ff;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#4ecdc4;stop-opacity:1" />
+                                </linearGradient>
+                            </defs>
+                            <g transform="translate(50, 50)">
+                                <circle cx="0" cy="0" r="20" fill="none" stroke="#00d4ff" stroke-width="1"
+                                    stroke-dasharray="60 10" opacity="0.8">
+                                    <animateTransform attributeName="transform" type="rotate" values="0;360" dur="8s"
+                                        repeatCount="indefinite" />
+                                </circle>
+                                <circle cx="0" cy="0" r="14" fill="none" stroke="#ff6b35" stroke-width="1"
+                                    stroke-dasharray="45 8" opacity="0.7">
+                                    <animateTransform attributeName="transform" type="rotate" values="360;0" dur="6s"
+                                        repeatCount="indefinite" />
+                                </circle>
+                                <circle cx="0" cy="0" r="4" fill="url(#footerCoreGradient)" />
+                                <circle cx="0" cy="0" r="1.8" fill="white" />
+                            </g>
+                            <text x="75" y="60" font-family="'Inter', 'SF Pro Display', system-ui, sans-serif"
+                                font-size="20" font-weight="700">
+                                <tspan fill="url(#footerCodeTextGradient)">Code</tspan>
+                                <tspan fill="white">Orbis</tspan>
+                            </text>
+                        </svg>
+                    </div>
+                    <p style="color: #ccc; line-height: 1.6;">CodeOrbis is a global technology consulting and services
+                        company, helping global corporations, start-ups and SME with agility to achieve competitive
+                        advantage.</p>
+                    <div style="margin-top: 1rem;">
+                        <i class="fas fa-phone" style="color: #667eea;"></i>
+                        <span style="margin-left: 0.5rem; color: #ccc;">+1 (555) 123-4567</span>
+                    </div>
+                    <div style="margin-top: 0.5rem;">
+                        <i class="fas fa-envelope" style="color: #667eea;"></i>
+                        <span style="margin-left: 0.5rem; color: #ccc;">info@codeorbis.com</span>
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Hire Developers</h3>
+                    <ul>
+                        <li><a href="#services">React Developers</a></li>
+                        <li><a href="#services">Angular Developers</a></li>
+                        <li><a href="#services">Node.js Developers</a></li>
+                        <li><a href="#services">Python Developers</a></li>
+                        <li><a href="#services">Mobile App Developers</a></li>
+                        <li><a href="#services">AI/ML Engineers</a></li>
+                        <li><a href="#services">Full Stack Developers</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Products</h3>
+                    <ul>
+                        <li><a href="#portfolio">Business Intelligence Suite</a></li>
+                        <li><a href="#portfolio">AI Chat Platform</a></li>
+                        <li><a href="#portfolio">E-commerce Solutions</a></li>
+                        <li><a href="#portfolio">Mobile Applications</a></li>
+                        <li><a href="#portfolio">Custom CMS</a></li>
+                        <li><a href="#portfolio">Analytics Dashboard</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Industries</h3>
+                    <ul>
+                        <li><a href="#services">Healthcare</a></li>
+                        <li><a href="#services">FinTech</a></li>
+                        <li><a href="#services">E-commerce</a></li>
+                        <li><a href="#services">Education</a></li>
+                        <li><a href="#services">Real Estate</a></li>
+                        <li><a href="#services">Manufacturing</a></li>
+                        <li><a href="#services">Logistics</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2024 CodeOrbis. All rights reserved. | Privacy Policy | Terms of Service</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const navMenu = document.querySelector('.nav-menu');
+
+        mobileMenu.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+        });
+
+        // Technology Tabs Functionality
+        const techTabs = document.querySelectorAll('.tech-tab');
+        const techGrid = document.getElementById('tech-grid');
+
+        const technologies = {
+            frontend: [
+                { icon: 'fab fa-react', name: 'React' },
+                { icon: 'fab fa-angular', name: 'Angular' },
+                { icon: 'fab fa-vuejs', name: 'Vue.js' },
+                { icon: 'fab fa-js-square', name: 'TypeScript' },
+                { icon: 'fab fa-html5', name: 'HTML5' }
+            ],
+            backend: [
+                { icon: 'fab fa-node-js', name: 'Node.js' },
+                { icon: 'fab fa-python', name: 'Python' },
+                { icon: 'fas fa-server', name: '.NET' },
+                { icon: 'fab fa-java', name: 'Java' },
+                { icon: 'fab fa-php', name: 'PHP' }
+            ],
+            mobile: [
+                { icon: 'fab fa-react', name: 'React Native' },
+                { icon: 'fab fa-flutter', name: 'Flutter' },
+                { icon: 'fab fa-swift', name: 'Swift' },
+                { icon: 'fab fa-android', name: 'Kotlin' },
+                { icon: 'fas fa-mobile-alt', name: 'Xamarin' }
+            ],
+            database: [
+                { icon: 'fas fa-database', name: 'MongoDB' },
+                { icon: 'fas fa-database', name: 'PostgreSQL' },
+                { icon: 'fas fa-database', name: 'MySQL' },
+                { icon: 'fas fa-fire', name: 'Firebase' },
+                { icon: 'fas fa-chart-line', name: 'Redis' }
+            ],
+            ai: [
+                { icon: 'fas fa-brain', name: 'TensorFlow' },
+                { icon: 'fas fa-robot', name: 'PyTorch' },
+                { icon: 'fas fa-eye', name: 'OpenCV' },
+                { icon: 'fas fa-language', name: 'NLP' },
+                { icon: 'fas fa-chart-bar', name: 'Scikit-learn' }
+            ]
+        };
+
+        function updateTechGrid(category) {
+            const techs = technologies[category];
+            techGrid.innerHTML = '';
+
+            techs.forEach((tech, index) => {
+                const techItem = document.createElement('div');
+                techItem.className = 'tech-item';
+                techItem.style.animationDelay = `${index * 0.1}s`;
+                techItem.innerHTML = `
+                    <div class="tech-icon"><i class="${tech.icon}"></i></div>
+                    <div class="tech-name">${tech.name}</div>
+                `;
+                techGrid.appendChild(techItem);
+            });
+        }
+
+        techTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Remove active class from all tabs
+                techTabs.forEach(t => t.classList.remove('active'));
+                // Add active class to clicked tab
+                tab.classList.add('active');
+                // Update tech grid
+                updateTechGrid(tab.dataset.category);
+            });
+        });
+
+        // Smooth Scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Navbar Background on Scroll
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 100) {
+                navbar.style.background = 'rgba(255, 255, 255, 0.98)';
+                navbar.style.boxShadow = '0 2px 30px rgba(0, 0, 0, 0.15)';
+            } else {
+                navbar.style.background = 'rgba(255, 255, 255, 0.95)';
+                navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
+            }
+        });
+
+        // Intersection Observer for Animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in');
+                }
+            });
+        }, observerOptions);
+
+        // Observe elements for animation
+        document.querySelectorAll('.service-card, .tech-item, .portfolio-item, .feature-card').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Dynamic testimonials (optional enhancement)
+        const testimonials = [
+            {
+                quote: "I had the pleasure of working with the team at CodeOrbis for over a year, developing and testing our company's first AI-powered application. It was rolled out globally and performed exceptionally well. They did an outstanding job at translating functional specifications into intelligent solutions and implementing cutting-edge models. Project communication was excellent. I will definitely be using them again in the future.",
+                author: "SARAH JOHNSON",
+                position: "CTO OF TECHSTART INNOVATIONS"
+            },
+            {
+                quote: "CodeOrbis transformed our legacy system into a modern, scalable platform. Their expertise in cloud technologies and AI integration helped us reduce operational costs by 40% while improving user experience significantly. The team's professionalism and technical depth exceeded our expectations.",
+                author: "MICHAEL CHEN",
+                position: "VP OF ENGINEERING AT INNOVATE CORP"
+            },
+            {
+                quote: "Working with CodeOrbis was a game-changer for our startup. They not only delivered our mobile app on time and within budget but also provided valuable insights that improved our business model. Their agile approach and constant communication made the entire process seamless.",
+                author: "EMILY RODRIGUEZ",
+                position: "FOUNDER OF MOBILE SOLUTIONS INC"
+            }
+        ];
+
+        let currentTestimonial = 0;
+
+        function rotateTestimonials() {
+            const testimonialCard = document.querySelector('.testimonial-card');
+            const quote = testimonialCard.querySelector('.testimonial-quote');
+            const author = testimonialCard.querySelector('.testimonial-author');
+            const position = testimonialCard.querySelector('.testimonial-position');
+
+            // Fade out
+            testimonialCard.style.opacity = '0.5';
+            testimonialCard.style.transform = 'translateY(20px)';
+
+            setTimeout(() => {
+                // Update content
+                quote.textContent = testimonials[currentTestimonial].quote;
+                author.textContent = testimonials[currentTestimonial].author;
+                position.textContent = testimonials[currentTestimonial].position;
+
+                // Fade in
+                testimonialCard.style.opacity = '1';
+                testimonialCard.style.transform = 'translateY(0)';
+
+                currentTestimonial = (currentTestimonial + 1) % testimonials.length;
+            }, 300);
+        }
+
+        // Auto-rotate testimonials every 8 seconds
+        setInterval(rotateTestimonials, 8000);
+
+        // Add loading animation
+        window.addEventListener('load', () => {
+            document.body.style.opacity = '0';
+            setTimeout(() => {
+                document.body.style.transition = 'opacity 0.5s ease';
+                document.body.style.opacity = '1';
+            }, 100);
+        });
+
+        // Add floating action button for quick contact
+        const floatingBtn = document.createElement('div');
+        floatingBtn.innerHTML = '<i class="fas fa-comments"></i>';
+        floatingBtn.style.cssText = `
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #00d4ff 0%, #ff6b35 100%);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 8px 25px rgba(0, 212, 255, 0.3);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        `;
+
+        floatingBtn.addEventListener('mouseenter', () => {
+            floatingBtn.style.transform = 'scale(1.1)';
+            floatingBtn.style.boxShadow = '0 12px 35px rgba(0, 212, 255, 0.4)';
+        });
+
+        floatingBtn.addEventListener('mouseleave', () => {
+            floatingBtn.style.transform = 'scale(1)';
+            floatingBtn.style.boxShadow = '0 8px 25px rgba(0, 212, 255, 0.3)';
+        });
+
+        floatingBtn.addEventListener('click', () => {
+            document.querySelector('#contact').scrollIntoView({ behavior: 'smooth' });
+        });
+
+        document.body.appendChild(floatingBtn);
+
+        // Contact Form Handling
+        // Contact Form Handling - Hybrid Approach
+        const contactForm = document.getElementById('contactForm');
+
+        // Check for success/error messages from URL parameters on page load
+        window.addEventListener('load', function () {
+            const urlParams = new URLSearchParams(window.location.search);
+            const status = urlParams.get('status');
+            const msg = urlParams.get('msg');
+
+            if (status === 'success') {
+                showNotification('Thank you! Your message has been sent successfully. We\'ll get back to you within 24 hours.', 'success');
+                // Clean URL
+                window.history.replaceState({}, document.title, window.location.pathname);
+            } else if (status === 'error') {
+                const errorMsg = msg ? decodeURIComponent(msg) : 'Sorry, there was an error sending your message. Please try again.';
+                showNotification(errorMsg, 'error');
+                // Clean URL
+                window.history.replaceState({}, document.title, window.location.pathname);
+            }
+        });
+
+        contactForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const submitBtn = contactForm.querySelector('.submit-btn');
+            const originalText = submitBtn.innerHTML;
+
+            // Validate required fields
+            const firstName = document.getElementById('firstName').value.trim();
+            const lastName = document.getElementById('lastName').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const message = document.getElementById('message').value.trim();
+
+            if (!firstName || !lastName || !email || !message) {
+                showNotification('Please fill in all required fields.', 'error');
+                return;
+            }
+
+            if (!isValidEmail(email)) {
+                showNotification('Please enter a valid email address.', 'error');
+                return;
+            }
+
+            // Show loading state
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+            submitBtn.disabled = true;
+
+            // Try AJAX first, fallback to form submission
+            tryAjaxSubmission(contactForm, submitBtn, originalText);
+        });
+
+        function tryAjaxSubmission(form, submitBtn, originalText) {
+            const formData = new FormData(form);
+
+            // Try AJAX with timeout
+            const timeoutId = setTimeout(() => {
+                // If AJAX fails, use traditional form submission
+                fallbackFormSubmission(form, submitBtn, originalText);
+            }, 10000); // 10 second timeout
+
+            fetch('contact_handler.php', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest' // Let PHP know it's AJAX
+                }
+            })
+                .then(response => {
+                    clearTimeout(timeoutId);
+
+                    if (!response.ok) {
+                        throw new Error(`Server error: ${response.status}`);
+                    }
+
+                    return response.text();
+                })
+                .then(text => {
+                    let data;
+                    try {
+                        data = JSON.parse(text);
+                    } catch (e) {
+                        // If not JSON, might be HTML error - use fallback
+                        throw new Error('Invalid server response');
+                    }
+
+                    if (data.success) {
+                        showSuccessState(submitBtn, originalText);
+                        showNotification(data.message, 'success');
+                        form.reset();
+                    } else {
+                        throw new Error(data.message || 'Server error occurred');
+                    }
+                })
+                .catch(error => {
+                    clearTimeout(timeoutId);
+                    console.log('AJAX failed, using form submission fallback');
+                    fallbackFormSubmission(form, submitBtn, originalText);
+                });
+        }
+
+        function fallbackFormSubmission(form, submitBtn, originalText) {
+            // Show different loading message
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Redirecting...';
+
+            // Add a hidden field to track form submission
+            const hiddenField = document.createElement('input');
+            hiddenField.type = 'hidden';
+            hiddenField.name = 'ajax_fallback';
+            hiddenField.value = '1';
+            form.appendChild(hiddenField);
+
+            // Submit form normally (will redirect to contact_handler.php)
+            form.submit();
+        }
+
+        function isValidEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+
+        function showSuccessState(submitBtn, originalText) {
+            submitBtn.innerHTML = '<i class="fas fa-check"></i> Message Sent!';
+            submitBtn.style.background = 'linear-gradient(135deg, #4CAF50 0%, #45a049 100%)';
+
+            setTimeout(() => {
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+                submitBtn.style.background = 'linear-gradient(135deg, #00d4ff 0%, #ff6b35 100%)';
+            }, 3000);
+        }
+
+        function showErrorState(submitBtn, originalText) {
+            submitBtn.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Error - Try Again';
+            submitBtn.style.background = 'linear-gradient(135deg, #e74c3c 0%, #c0392b 100%)';
+
+            setTimeout(() => {
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+                submitBtn.style.background = 'linear-gradient(135deg, #00d4ff 0%, #ff6b35 100%)';
+            }, 3000);
+        }
+
+        // Simple notification function
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+                color: white;
+                padding: 1rem 1.5rem;
+                border-radius: 10px;
+                box-shadow: 0 8px 25px rgba(76, 175, 80, 0.3);
+                z-index: 10000;
+                font-weight: 600;
+                max-width: 350px;
+                animation: slideInRight 0.5s ease-out;
+            `;
+            notification.textContent = message;
+
+            document.body.appendChild(notification);
+
+            // Auto remove after 5 seconds
+            setTimeout(() => {
+                notification.style.animation = 'slideOutRight 0.5s ease-out';
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                }, 500);
+            }, 5000);
+        }
+
+        // Add animation keyframes for notifications
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideInRight {
+                from {
+                    transform: translateX(100%);
+                    opacity: 0;
+                }
+                to {
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+            }
+            
+            @keyframes slideOutRight {
+                from {
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+                to {
+                    transform: translateX(100%);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+
+</html>
